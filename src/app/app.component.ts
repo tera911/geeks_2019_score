@@ -27,18 +27,23 @@ export class AppComponent implements OnInit {
       xAxes: [{
         type: 'realtime',
         realtime: {
-          duration: 20000,
+          duration: 60000,
           refresh: 1000,
-          delay: 500,
+          delay: 2000,
         }
       }],
-      yAxes: []
+      yAxes: [{
+        ticks: {
+          min: 50
+        }
+      }]
     },
     plugins: {
       streaming: {            // per-chart option
         frameRate: 30       // chart is drawn 30 times every second
       }
-    }
+    },
+    maintainAspectRatio: false,
   };
 
   barConfig = {
@@ -54,7 +59,7 @@ export class AppComponent implements OnInit {
       scales: {
         yAxes: [{
           ticks: {
-            max: 300,
+            max: 150,
             min: 50
           }
         }]
@@ -81,8 +86,8 @@ export class AppComponent implements OnInit {
     gradient.addColorStop(1, 'rgba(255, 0, 0, 0)');
     this.barConfig.datasets[0].backgroundColor = gradient;
 
-    this.test();
-    // this.prod();
+    // this.test();
+    this.prod();
   }
 
   prod() {

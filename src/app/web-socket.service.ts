@@ -12,7 +12,7 @@ export class WebSocketService {
 
   serve(): WebSocketSubject<MessageEvent> {
     return webSocket({
-      url: `ws://localhost:5001`,
+      url: `ws://172.16.255.248:5001`,
       deserializer: message => {
         return message;
       }
