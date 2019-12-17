@@ -1,0 +1,23 @@
+<div style="width: 50%;float: left; height: 800px;">
+    <canvas baseChart #chart
+            [datasets]="barConfig.datasets"
+            [options]="barConfig.options"
+            [chartType]="barConfig.type"
+            [labels]="barConfig.label">
+    </canvas>
+</div>
+<div style="width: 50%; float: left;">
+    <div style="font-size: 15rem;text-align: center;">
+        {{heartRateScore}}
+    </div>
+    <canvas
+            baseChart
+            [chartType]="'line'"
+            [datasets]="datasets"
+            [options]="options"
+            [colors]="chartColor">
+
+    </canvas>
+
+</div>
+
