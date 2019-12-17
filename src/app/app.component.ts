@@ -1,4 +1,7 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {WebSocketService} from './web-socket.service';
+import {WebSocketSubject} from 'rxjs/webSocket';
+import {toNumbers} from '@angular/compiler-cli/src/diagnostics/typescript_version';
 
 @Component({
   selector: 'app-root',
@@ -66,6 +69,11 @@ export class AppComponent implements OnInit {
 
   @ViewChild('chart', null) canvas;
 
+  subject: WebSocketSubject<unknown>;
+
+  constructor(private webSocketService: WebSocketService) {
+  }
+
   ngOnInit(): void {
 
     const gradient = this.canvas.nativeElement.getContext('2d').createLinearGradient(0, 0, 0, 1000);
@@ -74,6 +82,21 @@ export class AppComponent implements OnInit {
     this.barConfig.datasets[0].backgroundColor = gradient;
 
     this.test();
+    // this.prod();
+  }
+
+  prod() {
+    this.subject = this.webSocketService.serve();
+    this.subject.subscribe((res: MessageEvent) => {
+      const score = parseFloat(res.data);
+      this.datasets[0].data.push({
+        x: new Date(),
+        y: score
+      });
+      const intScore = Math.round(score);
+      this.barConfig.datasets[0].data = [intScore];
+      this.heartRateScore = intScore;
+    });
   }
 
   test() {
