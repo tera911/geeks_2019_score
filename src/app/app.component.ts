@@ -9,6 +9,7 @@ import {toNumbers} from '@angular/compiler-cli/src/diagnostics/typescript_versio
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+  isStart = false;
   heartRateScore = 0;
   datasets: any[] = [
     {data: [], label: '心拍数', lineTension: 0.1},
@@ -93,6 +94,7 @@ export class AppComponent implements OnInit {
   prod() {
     this.subject = this.webSocketService.serve();
     this.subject.subscribe((res: MessageEvent) => {
+      this.isStart = true;
       const score = parseFloat(res.data);
       this.datasets[0].data.push({
         x: new Date(),
