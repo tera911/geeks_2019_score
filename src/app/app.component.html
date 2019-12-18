@@ -1,5 +1,7 @@
-<ng-container *ngIf="!isStart">
-    <h3 style="font-size: 3rem;height: 10000px;">Connect Sensor, Waiting...</h3>
+<ng-container *ngIf="!isView">
+    <h3 style="font-size: 3rem;height: 10000px;">Connect Sensor, Waiting<span
+            *ngFor="let i of waitingQueue">.</span>
+    </h3>
 </ng-container>
 <ng-container>
     <div style="width: 30%;float: left; height: 800px;">
